@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "QR_Bus_System", "QR_Bus_System.phpproj", "{57BB8FB6-A172-4C3D-85CE-0561D69D9D50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57BB8FB6-A172-4C3D-85CE-0561D69D9D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BB8FB6-A172-4C3D-85CE-0561D69D9D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BB8FB6-A172-4C3D-85CE-0561D69D9D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BB8FB6-A172-4C3D-85CE-0561D69D9D50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15E93AA5-1946-4617-93C3-6163A67CD6F1}
+	EndGlobalSection
+EndGlobal
