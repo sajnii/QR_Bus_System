@@ -1,0 +1,147 @@
+CREATE TABLE login_category (
+    LID VARCHAR(10) NOT NULL PRIMARY KEY,
+    Login_Type VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE login (
+    Username VARCHAR(15) NOT NULL PRIMARY KEY,
+    Password VARCHAR(10) NOT NULL,
+    FOREIGN KEY (LID) REFERENCES login_category(LID)
+);
+
+CREATE TABLE user (
+    User_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+    First_Name VARCHAR(255) NOT NULL,
+    Middle_Name VARCHAR(255) NOT NULL,
+    Last_Name VARCHAR(255) NOT NULL,
+    DOB DATE NOT NULL,
+    Gender VARCHAR(10) NOT NULL,
+    User_Type VARCHAR(255) NOT NULL,
+    NIC VARCHAR(12) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    Email VARCHAR(30) NOT NULL,
+    MobileNo INT NOT NULL,
+    Username VARCHAR(10),
+    Password VARCHAR(15),
+    Confirmed_Password VARCHAR(15)
+);
+
+CREATE TABLE administrator (
+   Admin_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   Qualifications VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE busOperator
+  Bus_Op_ID VARCHAR(10) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE busDriver (
+   Bus_Driver_ID VARCHAR(10) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE passenger (
+   Passenger_ID VARCHAR(10) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE report (
+   Report_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   Report_Name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE payment (
+   Payment_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   Amount CURRENCY NOT NULL,
+   Payment_Type VARCHAR(255) NOT NULL,
+   Report_ID VARCHAR(10),
+   Issued_Date DATE NOT NULL,
+   FOREIGN KEY (Report_ID) REFERENCES Report(Report_ID)
+);
+
+CREATE TABLE passengerPayment (
+   Passenger_ID VARCHAR(10),
+   Payment_ID VARCHAR(10),
+   Payment_Date Date NOT NULL,
+   FOREIGN KEY (Passenger_ID) REFERENCES passenger(Passenger_ID),
+   FOREIGN KEY (Payment_ID) REFERENCES payment(Payment_ID)
+);
+
+CREATE TABLE bus (
+   Bus_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   No_of_Seats INT NOT NULL,
+   Bus_Route VARCHAR(255) NOT NULL,
+   Bus_Service_TelNo INT NOT NULL,
+   No_of_Buses INT NOT NULL
+);
+
+CREATE TABLE eticket (
+   E-Ticket_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   QR_Code_No VARCHAR(15) NOT NULL,
+   Valid_Date DATE NOT NULL,
+   Passenger_ID VARCHAR(10),
+   Bus_ID VARCHAR(10),
+   FOREIGN KEY (Passenger_ID) REFERENCES passenger(Passenger_ID),
+   FOREIGN KEY (Bus_ID) REFERENCES bus(Bus_ID)
+);
+
+CREATE TABLE drivenLicense (
+   License_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   Issue_Date DATE NOT NULL,
+   Expire_Date DATE NOT NULL,
+   Bus_Driver_ID VARCHAR(10),
+   FOREIGN KEY (Bus_Driver_ID) REFERENCES busDriver(Bus_Driver_ID)
+)
+
+CREATE TABLE busLicense (
+   Bus_ID VARCHAR(10),
+   License_ID VARCHAR(10),
+   FOREIGN KEY (Bus_ID) REFERENCES bus(Bus_ID),
+   FOREIGN KEY (License_ID) REFERENCES busDriver(License_ID)
+);
+
+CREATE TABLE location (
+   Location_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   District VARCHAR(255) NOT NULL,
+   City VARCHAR(255) NOT NULL,
+   Zip_Code INT NOT NULL
+);
+
+CREATE TABLE busLocation (
+   Bus_ID VARCHAR(10),
+   Location_ID VARCHAR(10),
+   FOREIGN KEY (Bus-ID) REFERENCES bus(Bus_ID),
+   FOREIGN KEY (Location_ID) REFERNCES location(Location_ID)
+);
+
+/*ER clarrifications 
+    User - Report cardinality ratio m:n */
+
+CREATE TABLE userReport (
+   User_ID VARCHAR(10),
+   Report_ID VARCHAR(10),
+   Issued_Date DATE NOT NULL,
+   FOREIGN KEY (User_ID) REFERENCES user(User_ID),
+   FOREIGN KEY (Report_ID) REFERENCES report(Report_ID)
+);
+
+CREATE TABLE busFare (
+   Fare_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+   Fare_Type VARCHAR(255) NOT NULL,
+   Amount DECIMAL(10,2) NOT NULL,
+   Report_ID VARCHAR(10),
+   Issued_Date DATE NOT NULL,
+   FOREIGN KEY (Report_ID) REFERENCES report(Report_ID)
+);
+
+CREATE TABLE busFare (
+   Bus_ID VARCHAR(10),
+   Fare_ID VARCHAR(10),
+   FOREIGN KEY (Bus_ID) REFERENCES bus(Bus_ID),
+   FOREIGN KEY (Fare_ID) RFERENCES fare(Fare_ID)
+);
+
+CREATE TABLE location (
+    Location_ID VARCHAR(10) NOT NULL PRIMARY KEY,
+    District VARCHAR(255) NOT NULL,
+    City VARCHAR(255) NOT NULL,
+    Zip_Code INT NOT NULL
+);
